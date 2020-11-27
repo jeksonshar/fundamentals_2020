@@ -11,9 +11,9 @@ import com.android.fundamentals.R
 
 class WS03SecondFragment : Fragment() {
 
-    private var count = 0
-    private var tvValue: TextView? = null
-    private var backgroundColor: BackgroundColor = BackgroundColor.WHITE
+    var count = 0
+    var tvValue: TextView? = null
+    var backgroundColor: BackgroundColor = BackgroundColor.WHITE
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,13 +41,20 @@ class WS03SecondFragment : Fragment() {
         }
     }
 
+//    fun restoreBackground(str: String) {
+//        backgroundColor = BackgroundColor.valueOf(str)
+//        tvValue?.apply {
+//            background = ContextCompat.getDrawable(context, backgroundColor.resId)
+//        }
+//    }
+
     private fun BackgroundColor.change() = when (this) {
         BackgroundColor.PURPLE -> BackgroundColor.TEAL
         BackgroundColor.TEAL -> BackgroundColor.WHITE
         BackgroundColor.WHITE -> BackgroundColor.PURPLE
     }
 
-    private enum class BackgroundColor(val resId: Int) {
+    enum class BackgroundColor(val resId: Int) {
         PURPLE(R.color.purple_200),
         TEAL(R.color.teal_200),
         WHITE(R.color.white)

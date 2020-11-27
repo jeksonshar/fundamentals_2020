@@ -1,5 +1,6 @@
 package com.android.fundamentals.workshop03.task
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,7 @@ class WS03AssignmentFragment : Fragment() {
 
     private var btnIncrement: Button? = null
     private var btnChangeBackground: Button? = null
-    //TODO(WS2:5) Create a variable ClickListener
+    private var clickListener: SomeClickListener? = null
 
     //TODO(WS2:2) Override onCreateView() method
     override fun onCreateView(
@@ -25,15 +26,42 @@ class WS03AssignmentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnIncrement = view.findViewById<Button>(R.id.btn_increment).apply {
-            //TODO(WS2:7) Set button OnClickListener
+            //TODO(WS2:7) Set button OnClickListener +
+            setOnClickListener {
+                clickListener?.increaseValue()
+            }
         }
         btnChangeBackground = view.findViewById<Button>(R.id.btn_change_background).apply {
-            //TODO(WS2:8) Set button OnClickListener
+            //TODO(WS2:8) Set button OnClickListener +
+            setOnClickListener {
+                clickListener?.changeBackground()
+            }
         }
 
     }
 
+//  best practices вместо использования setListener(listener) метода
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//
+//        if (context is SomeClickListener) {
+//            clickListener = context
+//        }
+//    }
+//
+//    override fun onDetach() {
+//        super.onDetach()
+//        clickListener = null
+//    }
+
     //TODO(WS2:6) Create fun setListener() initialize clickListener in Fragment
+    fun setListener(listener: SomeClickListener) {
+        clickListener = listener
+    }
 
     //TODO(WS2:4) Create interface ClickListener
+     interface SomeClickListener {
+                fun increaseValue()
+                fun changeBackground()
+            }
 }
