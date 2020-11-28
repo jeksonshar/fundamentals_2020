@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import com.android.fundamentals.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -18,14 +19,14 @@ class SampleBottomSheet : BottomSheetDialogFragment() {
         style: Int
     ) {
         val contentView =
-            View.inflate(context, R.layout.dialog_fragment_ws04, null)
+            CoordinatorLayout.inflate(context, R.layout.dialog_fragment_ws04, null)
 
         val cancelButton = contentView.findViewById<Button>(R.id.btn_cancel)
         val okButton = contentView.findViewById<Button>(R.id.btn_ok)
 
         cancelButton.setOnClickListener {
-//            Toast.makeText(context, "Cancel", Toast.LENGTH_LONG).show()
-            Snackbar.make(it, "Cancel", Snackbar.LENGTH_INDEFINITE).show()
+            Toast.makeText(context, "Cancel", Toast.LENGTH_LONG).show()
+//            Snackbar.make(it, "Cancel", Snackbar.LENGTH_LONG).show()
         }
         okButton.setOnClickListener {
             Toast.makeText(context, "Ok", Toast.LENGTH_LONG).show()
@@ -42,7 +43,7 @@ class SampleBottomSheet : BottomSheetDialogFragment() {
 
     override fun onStop() {
         super.onStop()
-//        Toast.makeText(context, "Okно закрыто", Toast.LENGTH_LONG).show()
-        view?.let { Snackbar.make(it, "Окно закрыто", Snackbar.LENGTH_INDEFINITE).show() }
+        Toast.makeText(context, "Okно закрыто", Toast.LENGTH_LONG).show()
+//        view?.let { Snackbar.make(it.findViewById(R.id.main_container), "Окно закрыто", Snackbar.LENGTH_LONG).show() }
     }
 }

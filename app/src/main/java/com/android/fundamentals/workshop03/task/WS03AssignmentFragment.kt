@@ -9,14 +9,12 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.android.fundamentals.R
 
-//TODO(WS2:1) Create fragment class, extend Fragment
 class WS03AssignmentFragment : Fragment() {
 
     private var btnIncrement: Button? = null
     private var btnChangeBackground: Button? = null
     private var clickListener: SomeClickListener? = null
 
-    //TODO(WS2:2) Override onCreateView() method
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,41 +23,33 @@ class WS03AssignmentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         btnIncrement = view.findViewById<Button>(R.id.btn_increment).apply {
-            //TODO(WS2:7) Set button OnClickListener +
             setOnClickListener {
                 clickListener?.increaseValue()
             }
         }
+
         btnChangeBackground = view.findViewById<Button>(R.id.btn_change_background).apply {
-            //TODO(WS2:8) Set button OnClickListener +
             setOnClickListener {
                 clickListener?.changeBackground()
             }
         }
-
     }
 
-//  best practices вместо использования setListener(listener) метода
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//
-//        if (context is SomeClickListener) {
-//            clickListener = context
-//        }
-//    }
-//
-//    override fun onDetach() {
-//        super.onDetach()
-//        clickListener = null
-//    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
 
-    //TODO(WS2:6) Create fun setListener() initialize clickListener in Fragment
-    fun setListener(listener: SomeClickListener) {
-        clickListener = listener
+        if (context is SomeClickListener) {
+            clickListener = context
+        }
     }
 
-    //TODO(WS2:4) Create interface ClickListener
+    override fun onDetach() {
+        super.onDetach()
+        clickListener = null
+    }
+
      interface SomeClickListener {
                 fun increaseValue()
                 fun changeBackground()

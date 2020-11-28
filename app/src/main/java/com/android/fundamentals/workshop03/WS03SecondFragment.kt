@@ -26,7 +26,6 @@ class WS03SecondFragment : Fragment() {
         tvValue = view.findViewById<TextView>(R.id.tv_value).apply {
             text = "$count"
         }
-
     }
 
     fun increaseValue() {
@@ -41,12 +40,16 @@ class WS03SecondFragment : Fragment() {
         }
     }
 
-//    fun restoreBackground(str: String) {
-//        backgroundColor = BackgroundColor.valueOf(str)
-//        tvValue?.apply {
-//            background = ContextCompat.getDrawable(context, backgroundColor.resId)
-//        }
-//    }
+    fun restoreBackground(str: String)  {
+        backgroundColor = when (str) {
+            "PURPLE" -> BackgroundColor.PURPLE
+            "TEAL" -> BackgroundColor.TEAL
+            else -> BackgroundColor.WHITE
+        }
+        tvValue?.apply {
+            background = ContextCompat.getDrawable(context, backgroundColor.resId)
+        }
+    }
 
     private fun BackgroundColor.change() = when (this) {
         BackgroundColor.PURPLE -> BackgroundColor.TEAL
