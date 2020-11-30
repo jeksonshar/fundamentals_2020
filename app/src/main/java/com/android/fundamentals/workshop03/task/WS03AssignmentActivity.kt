@@ -30,21 +30,7 @@ class WS03AssignmentActivity : AppCompatActivity(), WS03AssignmentFragment.SomeC
             }
         } else {
             secondFragment = supportFragmentManager.findFragmentByTag(SECOND_FRAGMENT_TAG) as WS03SecondFragment
-
-            secondFragment.count = savedInstanceState.getInt(KEY_COUNT)
-
-            val backgroundSavedEnum = savedInstanceState.getString(KEY_BACKGROUND_ENUM)
-            if (backgroundSavedEnum != null) {
-                secondFragment.restoreBackground(backgroundSavedEnum)
-            }
         }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
-        outState.putInt(KEY_COUNT, secondFragment.count)
-        outState.putString(KEY_BACKGROUND_ENUM, secondFragment.backgroundColor.name)
     }
 
     override fun increaseValue() {
@@ -57,7 +43,5 @@ class WS03AssignmentActivity : AppCompatActivity(), WS03AssignmentFragment.SomeC
 
     companion object {
         const val SECOND_FRAGMENT_TAG = "SecondFragment"
-        const val KEY_COUNT = "KeyCount"
-        const val KEY_BACKGROUND_ENUM = "KeyBackgroundEnum"
     }
 }
